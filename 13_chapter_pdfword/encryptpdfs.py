@@ -32,7 +32,8 @@ try:
     assert len(sys.argv) == 3 
     assert os.path.isdir(sys.argv[1])
 except AssertionError:
-    print("Command line arguments are not valid. Try again.")    
+    print("Command line arguments are not valid. Try again.")  
+    exit()  
 
 folder = sys.argv[1]
 password = sys.argv[2]
