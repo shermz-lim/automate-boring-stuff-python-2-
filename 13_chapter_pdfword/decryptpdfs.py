@@ -33,7 +33,7 @@ for folderName, subfolders, filenames in os.walk(folder):
     for filename in filenames:
         # Sieving out pdf files 
         if filename.endswith('.pdf'):
-            filenamePath = folderName + "/" + filename     
+            filenamePath = os.path.join(folderName, filename)
 
             pdfFileObj = open(filenamePath, 'rb')
             pdfFileReader = PyPDF2.PdfFileReader(pdfFileObj)
