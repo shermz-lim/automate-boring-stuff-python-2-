@@ -28,3 +28,5 @@ print("Weather for {}:".format(location))
 # API url shows 5 days of weather forecast in 3h intervals . Printing this shows 5 days of forecast.
 for i in range(0, 40, 8):
     print("Forecast for {} is {}".format(forecasts[i]['dt_txt'], forecasts[i]['weather'][0]['main']))
+
+    
