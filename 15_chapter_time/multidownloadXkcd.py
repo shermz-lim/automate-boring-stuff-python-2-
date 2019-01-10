@@ -49,8 +49,8 @@ def downloadXkcd(x, y):
             
 #Creating & Starting multiple threads
 downloadThreads = []
-for i in range(1, 1501, 100):
-    downloadThread = threading.Thread(target=downloadXkcd, args=[i, i+99])
+for i in range(2016, 2097, 10):
+    downloadThread = threading.Thread(target=downloadXkcd, args=[i, i+9])
     downloadThreads.append(downloadThread)
     downloadThread.start()
   
