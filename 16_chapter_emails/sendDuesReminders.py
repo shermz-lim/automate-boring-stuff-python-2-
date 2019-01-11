@@ -17,7 +17,7 @@ latestMonth = ws.cell(row=1, column=ws.max_column).value
 # Iterating through each row of excel sheet 
 for row in ws.iter_rows(min_row=2):
     # If member has not paid, store their name as the key and email as value in members
-    if row[ws.max_column - 1].value == None:
+    if row[ws.max_column - 1].value != 'paid':
         name = row[0].value
         email = row[1].value 
         members[name] = email 
@@ -32,7 +32,10 @@ print(smtpObj.login(username, password))
 # Sending personalized email to each member
 for name in members:
     print("Sending email to {}".format(name))
-    smtpObj.sendmail(username, members[name], 'Subject: Due Fees\nDear {}, you have forgotten to pay your fees the month of {}. Do pay ASAP.'.format(name, latestMonth))
+    body = 'Subject: Due Fees\nDear {}, you have forgotten to pay your fees the month of {}. Do pay ASAP.'.format(name, latestMonth)
+    sendmailStatus = smtpObj.sendmail(username, members[name], body)
+    if sendmailStatus != {}:
+        print("There was a problem sending email to {}: {}".format(name, sendmailStatus))
 
 print("Done!")
 smtpObj.quit()
