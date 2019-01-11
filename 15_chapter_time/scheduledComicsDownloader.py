@@ -6,7 +6,7 @@ import requests, bs4, os, shelve
 
 # Creates database for comicNumber (ran once)
 # db = shelve.open('xkcdComicNum')
-# db['comicNum'] = 2096
+# db['comicNum'] = 2090
 # db.close()
 
 
@@ -43,7 +43,7 @@ def downloadXkcd(x):
             return x 
 
         # Writing download to file
-        filename = os.path.join("comicXkcd", os.path.basename(imgUrl))
+        filename = os.path.join("/home/shermzlim/Desktop/atbs_py/15_chapter_time/comicXkcd", os.path.basename(imgUrl))
         imageFile = open(filename, 'wb')
         for chunk in imageRes.iter_content(100000):
             imageFile.write(chunk)
@@ -52,7 +52,7 @@ def downloadXkcd(x):
         return x 
 
 # Retrieving next number of xkcd from database
-db = shelve.open('xkcdComicNum')
+db = shelve.open('/home/shermzlim/Desktop/atbs_py/15_chapter_time/xkcdComicNum')
 x = db['comicNum']
 
 # Running download with the next number of xkcd. If the comic exists,
