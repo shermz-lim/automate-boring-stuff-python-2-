@@ -14,11 +14,12 @@ logoWidth, logoHeight = logoIm.size
 
 # Makes dir to store new images
 os.makedirs('withLogo', exist_ok=True)
+extensions = ['.jpg', '.png', '.gif', '.bmp']
 
 # Loop over all files in the working directory.
 for filename in os.listdir('.'):
     # skip non-image files and the logo file itself 
-    if not (filename.endswith('.jpg') or filename.endswith('.png')) or filename == logo_filename:
+    if not (filename.lower()[-4:] in extensions) or filename == logo_filename:
         continue 
     
     im = Image.open(filename)
@@ -37,11 +38,13 @@ for filename in os.listdir('.'):
         print("Resizing {}...".format(filename))
         im = im.resize((width, height))
                             
-    #Calculating the pasting position for logo 
-    pasteX = width - logoWidth
-    pasteY = height - logoHeight
-    print("Adding logo to {}...".format(filename))
-    im.paste(logoIm, (pasteX, pasteY), logoIm)        
+    # Only add logo if image is at least twice the width and height of logo image
+    if (width >= 2*logoWidth and height >= 2*logoHeight):                        
+        #Calculating the pasting position for logo 
+        pasteX = width - logoWidth
+        pasteY = height - logoHeight
+        print("Adding logo to {}...".format(filename))
+        im.paste(logoIm, (pasteX, pasteY), logoIm)        
 
     # Saving file 
     im.save(os.path.join('withLogo', filename))
